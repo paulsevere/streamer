@@ -1,20 +1,29 @@
 require("dotenv").config();
+const os = require("os");
 const express = require("express");
 const fs = require("fs");
-const path = require("path");
+const { join, resolve } = require("path");
 const app = express();
 const videoRoot = process.env.VIDEOS_ROOT;
+const memeye = require("memeye");
+memeye();
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(join(__dirname, "public")));
 app.get("/list", (req, res) => {
   let files = fs.readdirSync(videoRoot);
   res.json(files);
 });
 app.use(express.static("public"));
-app.use(express.static(videoRoot));
-
-app.get("/", function(req, res) {
-  const path = "./vid.mp4";
+// app.use(express.static(videoRoot));
+app.get("/perf", (req, res) => {
+  const stats = {
+    global: { totalMemory: os.totalmem(), freeMemory: os.freemem() },
+    memoryUsage: process.memoryUsage()
+  };
+  res.json(stats);
+});
+app.get("/*", function(req, res) {
+  const path = resolve(videoRoot, req.url.slice(1));
   const stat = fs.statSync(path);
   const fileSize = stat.size;
   const range = req.headers.range;
