@@ -1,8 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const app = express();
-const videoRoot = "videolink";
+const videoRoot = process.env.VIDEOS_ROOT;
+
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/list", (req, res) => {
   let files = fs.readdirSync(videoRoot);
