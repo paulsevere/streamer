@@ -1,8 +1,14 @@
 const readLinks = () => JSON.parse(window.localStorage.getItem("visited"));
 
+const ex = ext => str => _.includes(str, ext);
+
+const extPredicate = str => _.overSome([ex(".wmv"), ex(".flv"), ex(".rar")]);
+
 const mapLinks = links => {
   let link_status = readLinks();
-  return links.map(e => ({ href: e, visited: link_status.includes(e) }));
+  return links
+    .filter(e => e.includes(".mp4"))
+    .map(e => ({ href: e, visited: link_status.includes(e) }));
 };
 const renderLink = link => `<a id=${link.href} href="${link.href}" class="collection-item collection-link ${link.visited
   ? "visited"
