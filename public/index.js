@@ -39,6 +39,9 @@ window.readLinks = readLinks;
 window.setLink = setLink;
 
 $(() => {
+  if (window.localStorage && !window.localStorage.getItem("visited")) {
+    window.localStorage.setItem("visited", JSON.stringify([]));
+  }
   $("html").on("click", ".collection-link", e => {
     setLink(e.target.id, e);
   });
