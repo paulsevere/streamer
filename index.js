@@ -5,16 +5,21 @@ const fs = require("fs");
 const { join, resolve } = require("path");
 const app = express();
 const videoRoot = process.env.VIDEOS_ROOT;
-const memeye = require("memeye");
-memeye();
+
+if (process.env.PROFILER) {
+  const memeye = require("memeye");
+
+  memeye({ frequency: 2000 });
+}
 
 app.use(express.static(join(__dirname, "public")));
 app.get("/list", (req, res) => {
   let files = fs.readdirSync(videoRoot);
+
   res.json(files);
 });
 app.use(express.static("public"));
-// app.use(express.static(videoRoot));
+app.use(express.static(videoRoot));
 app.get("/perf", (req, res) => {
   const stats = {
     global: { totalMemory: os.totalmem(), freeMemory: os.freemem() },

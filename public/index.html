@@ -12,16 +12,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
-    <title>Document</title>
+    <title>File Server</title>
     <style>
         body {
-            font-size: 11px !important;
+            font-size: 12px !important;
+            background-color: rgb(46, 46, 49);
+
         }
 
         .collection {
             display: flex!important;
             flex-direction: column;
             margin: 0px;
+            border: none;
+            border-radius: 0px;
         }
 
         #files.collection a.collection-item.visited {
@@ -35,6 +39,28 @@
         #visited.collection a.collection-item.visited {
             color: rgb(115, 115, 158);
             display: block;
+        }
+
+        .collection a.collection-item,
+        .card {
+            color: rgb(100, 163, 247);
+            border-bottom: 1px solid rgb(70, 70, 75);
+            background-color: transparent;
+
+        }
+
+        .card {
+            font-size: 16px;
+            text-align: center;
+            border-bottom: 3px solid rgb(238, 68, 68);
+        }
+
+        #visited {
+            margin-bottom: 50px;
+        }
+
+        .collection a.collection-item:not(.active):hover {
+            background-color: rgb(35, 35, 37);
         }
 
         #floating {
@@ -81,7 +107,7 @@
     </div>
     <div id="content">
         <div id="files-header" class="col s12 m12">
-            <div class="card blue-grey darken-1">
+            <div class="card ">
                 <div class="card-content white-text">
                     <p>files</p>
                 </div>
@@ -92,7 +118,7 @@
 
         </div>
         <div class="col s12 m12">
-            <div class="card blue-grey darken-1">
+            <div class="card ">
                 <div class="card-content white-text">
                     <p>visited</p>
                 </div>
