@@ -5,6 +5,8 @@ const ex = ext => str => _.includes(str, ext);
 const extPredicate = str => _.overSome([ex(".wmv"), ex(".flv"), ex(".rar")]);
 
 const mapLinks = links => {
+  links = _.sortBy(links, [e => e.includes("File"), e => parseInt(e.slice(4))]);
+
   let link_status = readLinks();
   return links
     .filter(e => e.includes(".mp4"))
